@@ -1,0 +1,28 @@
+@*@QnSCustomize*@
+@using System.Collections.Generic
+@using System.Linq
+@using QnSCommunityCount.AspMvc.Extensions 
+@model QnSCommunityCount.AspMvc.Models.Persistence.App.CostRecord
+@{
+    Func<string, string> translateFor = ViewData["TranslateFor"] as Func<string, string>;
+}
+
+<div class="form-group">
+    <label class="control-label">@translateFor(nameof(Model.Designation))</label>
+    <input name="@nameof(Model.Designation)" class="form-control" value="@(Model.Designation)" />
+    <span data-valmsg-for="@nameof(Model.Designation)" data-valmsg-replace="true" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="control-label">@translateFor(nameof(Model.Amount))</label>
+    <input type="text" name="@nameof(Model.Amount)" class="form-control" value="@(Model.Amount.ToString())" />
+    <span  data-valmsg-for="@nameof(Model.Amount)" data-valmsg-replace="true" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="control-label">@translateFor(nameof(Model.Date))</label>
+    <input type="date" name="@nameof(Model.Date)" class="form-control" value="@(Model.Date.ToString("yyyy-MM-dd"))" />
+    <span data-valmsg-for="@nameof(Model.Date)" data-valmsg-replace="true" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label class="control-label">@translateFor(nameof(Model.Member))</label>
+    @Html.ToSelect("form-control", "Member", "Member", Model.CommunityCosts.Members.Select(m => KeyValuePair.Create<string, string>(m, m )), Model.Member)
+</div>

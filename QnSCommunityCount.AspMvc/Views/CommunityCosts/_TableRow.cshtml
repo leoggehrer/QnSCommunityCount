@@ -1,0 +1,41 @@
+@*@QnSCodeCopy*@
+@*This partial view can alternatively be used with the shared index view.*@
+@model QnSCommunityCount.AspMvc.Models.Business.App.CommunityCosts
+
+@{
+    string controller = ViewContext.RouteData.Values["controller"].ToString();
+    Func<string, string> translateFor = ViewData["TranslateFor"] as Func<string, string>;
+    Func<string, int?, string> action = (a, id) => $"/{controller}/{a}{(id.HasValue ? "/" + id.Value.ToString() : string.Empty)}";
+}
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.CostCollection.Designation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.CostCollection.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.CostCollection.Currency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.TotalCosts)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.CostsPerMember)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.NumberOfMembers)
+        </td>
+        <td>
+            <a class="btn btn-sm btn-outline-primary" href="@action("Edit", Model.Id)" title="@translateFor("Edit")">
+                <i class="fa fa-edit"></i>
+            </a>
+            <a class="btn btn-sm btn-outline-secondary" href="@action("Details", Model.Id)" title="@translateFor("Details")">
+                <i class="fa fa-list"></i>
+            </a>
+            <a class="btn btn-sm btn-outline-danger" href="@action("Delete", Model.Id)" title="@translateFor("Delete")">
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+    </tr>

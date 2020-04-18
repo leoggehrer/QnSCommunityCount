@@ -1,0 +1,11 @@
+@*@QnSCodeCopy*@
+@model QnSCommunityCount.AspMvc.Models.Business.App.CommunityCosts
+@{
+    Func<string, string> translateFor = ViewData["TranslateFor"] as Func<string, string>;
+}
+
+@await Html.PartialAsync("_CostCollectionBody", Model)
+
+@await Html.PartialAsync("_BalancesBody", Model)
+
+@await Html.PartialAsync("_CostRecordsBody", Model)

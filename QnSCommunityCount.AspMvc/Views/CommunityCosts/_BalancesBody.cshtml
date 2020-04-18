@@ -1,0 +1,40 @@
+@*@QnSCustomize*@
+@using QnSCommunityCount.AspMvc.Models.Modules.App
+@model QnSCommunityCount.AspMvc.Models.Business.App.CommunityCosts
+@{
+    Func<string, string> translateFor = ViewData["TranslateFor"] as Func<string, string>;
+}
+
+@if (Model.Balances.Any())
+{
+    <hr />
+    <table class="table table-borderless">
+        <thead class="thead-dark">
+            <tr>
+                <th>@translateFor(nameof(Balance.From))</th>
+                <th></th>
+                <th>@translateFor(nameof(Balance.To))</th>
+                <th>@translateFor(nameof(Balance.Amount))</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Balances)
+            {
+                <tr>
+                    <td class="btn-outline-danger">
+                        @item.From
+                    </td>
+                    <td>
+                        =>
+                    </td>
+                    <td class="btn-outline-success">
+                        @item.To
+                    </td>
+                    <td>
+                        @item.Amount.ToString("f")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

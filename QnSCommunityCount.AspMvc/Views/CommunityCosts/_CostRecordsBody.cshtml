@@ -1,0 +1,78 @@
+@*@QnSCustomize*@
+@using QnSCommunityCount.AspMvc.Models.Persistence.App
+@model QnSCommunityCount.AspMvc.Models.Business.App.CommunityCosts
+@{
+    string controller = ViewContext.RouteData.Values["controller"].ToString();
+    string curaction = ViewContext.RouteData.Values["action"].ToString();
+    Func<string, string> translateFor = ViewData["TranslateFor"] as Func<string, string>;
+    Func<string, int?, string> action = (a, id) => $"/{controller}/{a}?id={Model.Id}&detailId={id}";
+    var href = $"/{controller}/CreateCostRecord/{Model.Id}";
+}
+
+<style type="text/css">
+    .btn-circle {
+        width: 40px;
+        height: 40px;
+        padding: 6px 0px;
+        border-radius: 20px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bolder;
+        line-height: 1.42857;
+    }
+</style>
+
+@if (curaction.StartsWith("Edit"))
+{
+    <div class="d-flex bg-transparent">
+        <div class="p-sm-0 ml-auto">
+            <a class="btn btn-outline-primary btn-circle btn-lg" href="@href">@("+")</a>
+        </div>
+    </div>
+}
+
+@if (Model.CostRecords.Any())
+{
+    <hr />
+    <table class="table table-borderless">
+        <thead class="thead-dark">
+            <tr>
+                <th>@translateFor(nameof(CostRecord.Date))</th>
+                <th>@translateFor(nameof(CostRecord.Designation))</th>
+                <th>@translateFor(nameof(CostRecord.Member))</th>
+                <th>@translateFor(nameof(CostRecord.Amount))</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CostRecords)
+            {
+                <tr>
+                    <td>
+                        @item.Date.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.Designation
+                    </td>
+                    <td>
+                        @item.Member
+                    </td>
+                    <td>
+                        @item.Amount.ToString("f")
+                    </td>
+                    <td>
+                        @if (curaction.StartsWith("Edit"))
+                        {
+                            <a class="btn btn-sm btn-outline-primary" href="@action("EditCostRecord", item.Id)" title="@translateFor("Edit")">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="btn btn-sm btn-outline-danger" href="@action("DeleteCostRecord", item.Id)" title="@translateFor("Delete")">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

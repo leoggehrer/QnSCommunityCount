@@ -1,0 +1,29 @@
+@*@QnSCodeCopy*@
+@*This partial view can alternatively be used with the shared index view.*@
+@model IEnumerable<QnSCommunityCount.AspMvc.Models.Business.App.CommunityCosts>
+
+@{
+    Func<string, string> translateFor = ViewData["TranslateFor"] as Func<string, string>;
+}
+
+<tr>
+    <th>
+        @translateFor(Html.DisplayNameFor(model => model.CostCollection.Designation))
+    </th>
+    <th>
+        @translateFor(Html.DisplayNameFor(model => model.CostCollection.Category))
+    </th>
+    <th>
+        @translateFor(Html.DisplayNameFor(model => model.CostCollection.Currency))
+    </th>
+    <th>
+        @translateFor(Html.DisplayNameFor(model => model.TotalCosts))
+    </th>
+    <th>
+        @translateFor(Html.DisplayNameFor(model => model.CostsPerMember))
+    </th>
+    <th>
+        @translateFor(Html.DisplayNameFor(model => model.NumberOfMembers))
+    </th>
+    <th></th>
+</tr>
