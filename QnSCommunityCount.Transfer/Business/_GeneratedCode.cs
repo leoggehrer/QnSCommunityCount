@@ -248,52 +248,6 @@ namespace QnSCommunityCount.Transfer.Business.Account
 		}
 		partial void Constructing();
 		partial void Constructed();
-		[JsonIgnore]
-		public QnSCommunityCount.Contracts.Persistence.Account.IIdentity Identity
-		{
-			get
-			{
-				OnIdentityReading();
-				return _identity;
-			}
-			set
-			{
-				bool handled = false;
-				OnIdentityChanging(ref handled, ref _identity);
-				if (handled == false)
-				{
-					this._identity = value;
-				}
-				OnIdentityChanged();
-			}
-		}
-		private QnSCommunityCount.Contracts.Persistence.Account.IIdentity _identity;
-		partial void OnIdentityReading();
-		partial void OnIdentityChanging(ref bool handled, ref QnSCommunityCount.Contracts.Persistence.Account.IIdentity _identity);
-		partial void OnIdentityChanged();
-		[JsonIgnore]
-		public System.Collections.Generic.IEnumerable<QnSCommunityCount.Contracts.Persistence.Account.IRole> Roles
-		{
-			get
-			{
-				OnRolesReading();
-				return _roles;
-			}
-			set
-			{
-				bool handled = false;
-				OnRolesChanging(ref handled, ref _roles);
-				if (handled == false)
-				{
-					this._roles = value;
-				}
-				OnRolesChanged();
-			}
-		}
-		private System.Collections.Generic.IEnumerable<QnSCommunityCount.Contracts.Persistence.Account.IRole> _roles;
-		partial void OnRolesReading();
-		partial void OnRolesChanging(ref bool handled, ref System.Collections.Generic.IEnumerable<QnSCommunityCount.Contracts.Persistence.Account.IRole> _roles);
-		partial void OnRolesChanged();
 		public void CopyProperties(QnSCommunityCount.Contracts.Business.Account.IAppAccess other)
 		{
 			if (other == null)
@@ -306,8 +260,12 @@ namespace QnSCommunityCount.Transfer.Business.Account
 			{
 				Id = other.Id;
 				Timestamp = other.Timestamp;
-				Identity = other.Identity;
-				Roles = other.Roles;
+				FirstItem.CopyProperties(other.FirstItem);
+				ClearSecondItems();
+				foreach (var item in other.SecondItems)
+				{
+					AddSecondItem(item);
+				}
 			}
 			AfterCopyProperties(other);
 		}
@@ -317,7 +275,53 @@ namespace QnSCommunityCount.Transfer.Business.Account
 }
 namespace QnSCommunityCount.Transfer.Business.Account
 {
-	partial class AppAccess : IdentityModel
+	partial class AppAccess : OneToManyModel<QnSCommunityCount.Contracts.Persistence.Account.IIdentity, QnSCommunityCount.Transfer.Persistence.Account.Identity, QnSCommunityCount.Contracts.Persistence.Account.IRole, QnSCommunityCount.Transfer.Persistence.Account.Role>
+	{
+	}
+}
+namespace QnSCommunityCount.Transfer.Business.Account
+{
+	using System.Text.Json.Serialization;
+	public partial class IdentityUser : QnSCommunityCount.Contracts.Business.Account.IIdentityUser
+	{
+		static IdentityUser()
+		{
+			ClassConstructing();
+			ClassConstructed();
+		}
+		static partial void ClassConstructing();
+		static partial void ClassConstructed();
+		public IdentityUser()
+		{
+			Constructing();
+			Constructed();
+		}
+		partial void Constructing();
+		partial void Constructed();
+		public void CopyProperties(QnSCommunityCount.Contracts.Business.Account.IIdentityUser other)
+		{
+			if (other == null)
+			{
+				throw new System.ArgumentNullException(nameof(other));
+			}
+			bool handled = false;
+			BeforeCopyProperties(other, ref handled);
+			if (handled == false)
+			{
+				Id = other.Id;
+				Timestamp = other.Timestamp;
+				FirstItem.CopyProperties(other.FirstItem);
+				SecondItem.CopyProperties(other.SecondItem);
+			}
+			AfterCopyProperties(other);
+		}
+		partial void BeforeCopyProperties(QnSCommunityCount.Contracts.Business.Account.IIdentityUser other, ref bool handled);
+		partial void AfterCopyProperties(QnSCommunityCount.Contracts.Business.Account.IIdentityUser other);
+	}
+}
+namespace QnSCommunityCount.Transfer.Business.Account
+{
+	partial class IdentityUser : OneToOneModel<QnSCommunityCount.Contracts.Persistence.Account.IIdentity, QnSCommunityCount.Transfer.Persistence.Account.Identity, QnSCommunityCount.Contracts.Persistence.Account.IUser, QnSCommunityCount.Transfer.Persistence.Account.User>
 	{
 	}
 }

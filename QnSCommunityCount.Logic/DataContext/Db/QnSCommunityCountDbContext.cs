@@ -1,4 +1,4 @@
-//@CustomizeCode
+//@QnSCodeCopy
 //MdStart
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -100,6 +100,9 @@ namespace QnSCommunityCount.Logic.DataContext.Db
             entityTypeBuilder
                 .Property(p => p.PasswordHash)
                 .IsRequired();
+            entityTypeBuilder
+                .Property(p => p.PasswordSalt)
+                .IsRequired();
         }
         partial void ConfigureEntityType(EntityTypeBuilder<Role> entityTypeBuilder)
         {
@@ -131,6 +134,18 @@ namespace QnSCommunityCount.Logic.DataContext.Db
                 .Ignore(p => p.Email);
             entityTypeBuilder
                 .Ignore(p => p.JsonWebToken);
+        }
+        partial void ConfigureEntityType(EntityTypeBuilder<User> entityTypeBuilder)
+        {
+            entityTypeBuilder
+                .Property(p => p.Firstname)
+                .HasMaxLength(64);
+            entityTypeBuilder
+                .Property(p => p.Lastname)
+                .HasMaxLength(64);
+
+            entityTypeBuilder
+                .Ignore(p => p.Fullname);
         }
         #endregion Configuration
     }

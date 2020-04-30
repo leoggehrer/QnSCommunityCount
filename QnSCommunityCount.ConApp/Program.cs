@@ -46,18 +46,9 @@ namespace QnSCommunityCount.ConApp
 
                 await GenerateMarokkoAsync(appLogin.SessionToken);
                 await appAccountManager.LogoutAsync(appLogin.SessionToken);
+
                 //await InitAppAccessAsync();
                 //await AddAppAccessAsync(AaUser, AaEmail, AaPwd, AaEnableJwt, AaRole);
-
-                //await AddAppAccessAsync("schueler1", "schueler1@gmx.com", "Passme1234!", AaEnableJwt);
-                //await AddAppAccessAsync("schueler2", "schueler2@gmx.com", "Passme1234!", AaEnableJwt);
-                //await AddAppAccessAsync("schueler3", "schueler3@gmx.com", "Passme1234!", AaEnableJwt);
-
-                //var rmLogin = await rmAccountManager.LogonAsync("schueler1@gmx.com", "Passme123!");
-                //var appLogin = await appAccountManager.LogonAsync(rmLogin.JsonWebToken);
-
-                //await appAccountManager.LogoutAsync(appLogin.SessionToken);
-                //await rmAccountManager.LogoutAsync(rmLogin.SessionToken);
             }
             catch (Exception ex)
             {
@@ -77,17 +68,17 @@ namespace QnSCommunityCount.ConApp
             using var ctrl = Adapters.Factory.Create<Contracts.Business.Account.IAppAccess>(login.SessionToken);
             var entity = await ctrl.CreateAsync();
 
-            entity.Identity.Name = user;
-            entity.Identity.Email = email;
-            entity.Identity.Password = pwd;
-            entity.Identity.EnableJwtAuth = enableJwtAuth;
+            entity.FirstItem.Name = user;
+            entity.FirstItem.Email = email;
+            entity.FirstItem.Password = pwd;
+            entity.FirstItem.EnableJwtAuth = enableJwtAuth;
 
             foreach (var item in roles)
             {
-                var role = entity.CreateRole();
+                var role = entity.CreateSecondItem();
 
                 role.Designation = item;
-                entity.AddRole(role);
+                entity.AddSecondItem(role);
             }
             await ctrl.InsertAsync(entity);
             await accMngr.LogoutAsync(login.SessionToken);

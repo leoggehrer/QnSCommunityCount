@@ -189,7 +189,7 @@ namespace QnSCommunityCount.Logic.Controllers.Business.App
         }
         public override async Task DeleteAsync(int id)
         {
-            var deleteItem = await GetByIdAsync(id);
+            var deleteItem = await GetByIdAsync(id).ConfigureAwait(false);
 
             if (deleteItem != null)
             {
@@ -214,11 +214,14 @@ namespace QnSCommunityCount.Logic.Controllers.Business.App
         {
             base.Dispose(disposing);
 
-            costCollectionController.Dispose();
-            costRecordController.Dispose();
+            if (disposing)
+            {
+                costCollectionController.Dispose();
+                costRecordController.Dispose();
 
-            costCollectionController = null;
-            costRecordController = null;
+                costCollectionController = null;
+                costRecordController = null;
+            }
         }
     }
 }

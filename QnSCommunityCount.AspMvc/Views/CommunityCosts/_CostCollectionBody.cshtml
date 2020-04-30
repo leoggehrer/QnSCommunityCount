@@ -1,69 +1,67 @@
-@*@QnSCustomize*@
-@using QnSCommunityCount.AspMvc.Models.Persistence.App
+@*@QnSCustomizeCode*@
 @model QnSCommunityCount.AspMvc.Models.Business.App.CommunityCosts
 @{
     Func<string, string> translateFor = ViewData["TranslateFor"] as Func<string, string>;
 }
-
-    <dl class="row">
+<dl class="row">
+    <dt class="col-sm-4">
+        <label class="control-label">@translateFor(nameof(Model.CostCollection.Designation))</label>
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.CostCollection.Designation)
+    </dd>
+    <dt class="col-sm-4">
+        <label class="control-label">@translateFor(nameof(Model.CostCollection.Description))</label>
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.CostCollection.Description)
+    </dd>
+    <dt class="col-sm-4">
+        <label class="control-label">@translateFor(nameof(Model.CostCollection.Currency))</label>
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.CostCollection.Currency)
+    </dd>
+    <dt class="col-sm-4">
+        <label class="control-label">@translateFor(nameof(Model.CostCollection.Category))</label>
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.CostCollection.Category)
+    </dd>
+    <dt class="col-sm-4">
+        <label class="control-label">@translateFor(nameof(Model.CostCollection.Members))</label>
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.CostCollection.Members)
+    </dd>
+    <dt class="col-sm-4">
+        <label class="control-label">@translateFor(nameof(Model.TotalCosts))</label>
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.TotalCosts)
+    </dd>
+    <dt class="col-sm-4">
+        <label class="control-label">@translateFor(nameof(Model.CostsPerMember))</label>
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.CostsPerMember)
+    </dd>
+    @for (int i = 0; i < Model.Members.Length; i++)
+    {
         <dt class="col-sm-4">
-            <label class="control-label">@translateFor(nameof(Model.CostCollection.Designation))</label>
+            <label class="control-label">@Model.Members[i]</label>
         </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.CostCollection.Designation)
-        </dd>
-        <dt class="col-sm-4">
-            <label class="control-label">@translateFor(nameof(Model.CostCollection.Description))</label>
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.CostCollection.Description)
-        </dd>
-        <dt class="col-sm-4">
-            <label class="control-label">@translateFor(nameof(Model.CostCollection.Currency))</label>
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.CostCollection.Currency)
-        </dd>
-        <dt class="col-sm-4">
-            <label class="control-label">@translateFor(nameof(Model.CostCollection.Category))</label>
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.CostCollection.Category)
-        </dd>
-        <dt class="col-sm-4">
-            <label class="control-label">@translateFor(nameof(Model.CostCollection.Members))</label>
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.CostCollection.Members)
-        </dd>
-        <dt class="col-sm-4">
-            <label class="control-label">@translateFor(nameof(Model.TotalCosts))</label>
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.TotalCosts)
-        </dd>
-        <dt class="col-sm-4">
-            <label class="control-label">@translateFor(nameof(Model.CostsPerMember))</label>
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.CostsPerMember)
-        </dd>
-        @for (int i = 0; i < Model.Members.Length; i++)
+        @if (Model.MemberAmounts[i] > Model.CostsPerMember)
         {
-            <dt class="col-sm-4">
-                <label class="control-label">@Model.Members[i]</label>
-            </dt>
-            @if (Model.MemberAmounts[i] > Model.CostsPerMember)
-            {
-                <dd class="col-sm-8 btn-outline-success">
-                    @Model.MemberAmounts[i].ToString("f")
-                </dd>
-            }
-            else
-            {
-                <dd class="col-sm-8 btn-outline-danger">
-                    @Model.MemberAmounts[i].ToString("f")
-                </dd>
-            }
+            <dd class="col-sm-8 btn-outline-success">
+                @Model.MemberAmounts[i].ToString("f")
+            </dd>
         }
-    </dl>
+        else
+        {
+            <dd class="col-sm-8 btn-outline-danger">
+                @Model.MemberAmounts[i].ToString("f")
+            </dd>
+        }
+    }
+</dl>

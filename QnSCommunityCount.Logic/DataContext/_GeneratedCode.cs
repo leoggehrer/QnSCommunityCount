@@ -39,6 +39,11 @@ namespace QnSCommunityCount.Logic.DataContext.Db
 			get;
 			set;
 		}
+		protected DbSet<Entities.Persistence.Account.User> UserSet
+		{
+			get;
+			set;
+		}
 		public override DbSet<E> Set<I, E>()
 		{
 			DbSet<E> result = null;
@@ -70,6 +75,10 @@ namespace QnSCommunityCount.Logic.DataContext.Db
 			{
 				result = RoleSet as DbSet<E>;
 			}
+			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Persistence.Account.IUser))
+			{
+				result = UserSet as DbSet<E>;
+			}
 			return result;
 		}
 		partial void DoModelCreating(ModelBuilder modelBuilder)
@@ -95,6 +104,9 @@ namespace QnSCommunityCount.Logic.DataContext.Db
 			modelBuilder.Entity<Entities.Persistence.Account.Role>().ToTable(nameof(Entities.Persistence.Account.Role), nameof(Entities.Persistence.Account)).HasKey(nameof(Entities.Persistence.Account.Role.Id));
 			modelBuilder.Entity<Entities.Persistence.Account.Role>().Property(p => p.Timestamp).IsRowVersion();
 			ConfigureEntityType(modelBuilder.Entity<Entities.Persistence.Account.Role>());
+			modelBuilder.Entity<Entities.Persistence.Account.User>().ToTable(nameof(Entities.Persistence.Account.User), nameof(Entities.Persistence.Account)).HasKey(nameof(Entities.Persistence.Account.User.Id));
+			modelBuilder.Entity<Entities.Persistence.Account.User>().Property(p => p.Timestamp).IsRowVersion();
+			ConfigureEntityType(modelBuilder.Entity<Entities.Persistence.Account.User>());
 		}
 		partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.App.CostCollection> entityTypeBuilder);
 		partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.App.CostRecord> entityTypeBuilder);
@@ -103,5 +115,6 @@ namespace QnSCommunityCount.Logic.DataContext.Db
 		partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.Account.IdentityXRole> entityTypeBuilder);
 		partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.Account.LoginSession> entityTypeBuilder);
 		partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.Account.Role> entityTypeBuilder);
+		partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.Account.User> entityTypeBuilder);
 	}
 }

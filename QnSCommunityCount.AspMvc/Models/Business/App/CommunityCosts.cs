@@ -33,6 +33,10 @@ namespace QnSCommunityCount.AspMvc.Models.Business.App
                 return cr;
             });
         }
+        partial void OnTotalCostsReading()
+        {
+            _totalCosts = Math.Round(_totalCosts, 2);
+        }
         partial void OnCostsPerMemberReading()
         {
             _costsPerMember = Math.Round(_costsPerMember, 2);

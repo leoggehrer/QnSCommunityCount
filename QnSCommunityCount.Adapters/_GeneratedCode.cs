@@ -19,6 +19,10 @@ namespace QnSCommunityCount.Adapters
 				{
 					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Persistence.Account.IRole>() as Contracts.Client.IAdapterAccess<I>;
 				}
+				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Persistence.Account.IUser))
+				{
+					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Persistence.Account.IUser>() as Contracts.Client.IAdapterAccess<I>;
+				}
 				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.App.ICommunityCosts))
 				{
 					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Business.App.ICommunityCosts>() as Contracts.Client.IAdapterAccess<I>;
@@ -26,6 +30,10 @@ namespace QnSCommunityCount.Adapters
 				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IAppAccess))
 				{
 					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Business.Account.IAppAccess>() as Contracts.Client.IAdapterAccess<I>;
+				}
+				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IIdentityUser))
+				{
+					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Business.Account.IIdentityUser>() as Contracts.Client.IAdapterAccess<I>;
 				}
 			}
 			else if (Adapter == AdapterType.Service)
@@ -42,6 +50,10 @@ namespace QnSCommunityCount.Adapters
 				{
 					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Persistence.Account.IRole, Transfer.Persistence.Account.Role>(BaseUri, "Role") as Contracts.Client.IAdapterAccess<I>;
 				}
+				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Persistence.Account.IUser))
+				{
+					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Persistence.Account.IUser, Transfer.Persistence.Account.User>(BaseUri, "User") as Contracts.Client.IAdapterAccess<I>;
+				}
 				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.App.ICommunityCosts))
 				{
 					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Business.App.ICommunityCosts, Transfer.Business.App.CommunityCosts>(BaseUri, "CommunityCosts") as Contracts.Client.IAdapterAccess<I>;
@@ -49,6 +61,10 @@ namespace QnSCommunityCount.Adapters
 				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IAppAccess))
 				{
 					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Business.Account.IAppAccess, Transfer.Business.Account.AppAccess>(BaseUri, "AppAccess") as Contracts.Client.IAdapterAccess<I>;
+				}
+				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IIdentityUser))
+				{
+					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Business.Account.IIdentityUser, Transfer.Business.Account.IdentityUser>(BaseUri, "IdentityUser") as Contracts.Client.IAdapterAccess<I>;
 				}
 			}
 			return result;
@@ -70,6 +86,10 @@ namespace QnSCommunityCount.Adapters
 				{
 					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Persistence.Account.IRole>(sessionToken) as Contracts.Client.IAdapterAccess<I>;
 				}
+				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Persistence.Account.IUser))
+				{
+					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Persistence.Account.IUser>(sessionToken) as Contracts.Client.IAdapterAccess<I>;
+				}
 				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.App.ICommunityCosts))
 				{
 					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Business.App.ICommunityCosts>(sessionToken) as Contracts.Client.IAdapterAccess<I>;
@@ -77,6 +97,10 @@ namespace QnSCommunityCount.Adapters
 				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IAppAccess))
 				{
 					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Business.Account.IAppAccess>(sessionToken) as Contracts.Client.IAdapterAccess<I>;
+				}
+				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IIdentityUser))
+				{
+					result = new Controller.GenericControllerAdapter<QnSCommunityCount.Contracts.Business.Account.IIdentityUser>(sessionToken) as Contracts.Client.IAdapterAccess<I>;
 				}
 			}
 			else if (Adapter == AdapterType.Service)
@@ -93,6 +117,10 @@ namespace QnSCommunityCount.Adapters
 				{
 					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Persistence.Account.IRole, Transfer.Persistence.Account.Role>(sessionToken, BaseUri, "Role") as Contracts.Client.IAdapterAccess<I>;
 				}
+				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Persistence.Account.IUser))
+				{
+					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Persistence.Account.IUser, Transfer.Persistence.Account.User>(sessionToken, BaseUri, "User") as Contracts.Client.IAdapterAccess<I>;
+				}
 				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.App.ICommunityCosts))
 				{
 					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Business.App.ICommunityCosts, Transfer.Business.App.CommunityCosts>(sessionToken, BaseUri, "CommunityCosts") as Contracts.Client.IAdapterAccess<I>;
@@ -100,6 +128,10 @@ namespace QnSCommunityCount.Adapters
 				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IAppAccess))
 				{
 					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Business.Account.IAppAccess, Transfer.Business.Account.AppAccess>(sessionToken, BaseUri, "AppAccess") as Contracts.Client.IAdapterAccess<I>;
+				}
+				else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IIdentityUser))
+				{
+					result = new Service.GenericServiceAdapter<QnSCommunityCount.Contracts.Business.Account.IIdentityUser, Transfer.Business.Account.IdentityUser>(sessionToken, BaseUri, "IdentityUser") as Contracts.Client.IAdapterAccess<I>;
 				}
 			}
 			return result;

@@ -17,6 +17,10 @@ namespace QnSCommunityCount.Logic
 			{
 				result = new Controllers.Persistence.Account.RoleController(CreateContext()) as Contracts.Client.IControllerAccess<I>;
 			}
+			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Persistence.Account.IUser))
+			{
+				result = new Controllers.Persistence.Account.UserController(CreateContext()) as Contracts.Client.IControllerAccess<I>;
+			}
 			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.App.ICommunityCosts))
 			{
 				result = new Controllers.Business.App.CommunityCostsController(CreateContext()) as Contracts.Client.IControllerAccess<I>;
@@ -24,6 +28,10 @@ namespace QnSCommunityCount.Logic
 			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IAppAccess))
 			{
 				result = new Controllers.Business.Account.AppAccessController(CreateContext()) as Contracts.Client.IControllerAccess<I>;
+			}
+			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IIdentityUser))
+			{
+				result = new Controllers.Business.Account.IdentityUserController(CreateContext()) as Contracts.Client.IControllerAccess<I>;
 			}
 			return result;
 		}
@@ -42,6 +50,10 @@ namespace QnSCommunityCount.Logic
 			{
 				result = new Controllers.Persistence.Account.RoleController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<I>;
 			}
+			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Persistence.Account.IUser))
+			{
+				result = new Controllers.Persistence.Account.UserController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<I>;
+			}
 			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.App.ICommunityCosts))
 			{
 				result = new Controllers.Business.App.CommunityCostsController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<I>;
@@ -49,6 +61,10 @@ namespace QnSCommunityCount.Logic
 			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IAppAccess))
 			{
 				result = new Controllers.Business.Account.AppAccessController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<I>;
+			}
+			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IIdentityUser))
+			{
+				result = new Controllers.Business.Account.IdentityUserController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<I>;
 			}
 			return result;
 		}
@@ -79,6 +95,14 @@ namespace QnSCommunityCount.Logic
 				}
 				as Contracts.Client.IControllerAccess<I>;
 			}
+			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Persistence.Account.IUser))
+			{
+				result = new Controllers.Persistence.Account.UserController(CreateContext())
+				{
+					SessionToken = sessionToken
+				}
+				as Contracts.Client.IControllerAccess<I>;
+			}
 			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.App.ICommunityCosts))
 			{
 				result = new Controllers.Business.App.CommunityCostsController(CreateContext())
@@ -90,6 +114,14 @@ namespace QnSCommunityCount.Logic
 			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IAppAccess))
 			{
 				result = new Controllers.Business.Account.AppAccessController(CreateContext())
+				{
+					SessionToken = sessionToken
+				}
+				as Contracts.Client.IControllerAccess<I>;
+			}
+			else if (typeof(I) == typeof(QnSCommunityCount.Contracts.Business.Account.IIdentityUser))
+			{
+				result = new Controllers.Business.Account.IdentityUserController(CreateContext())
 				{
 					SessionToken = sessionToken
 				}

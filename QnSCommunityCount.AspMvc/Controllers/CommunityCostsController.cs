@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +10,9 @@ namespace QnSCommunityCount.AspMvc.Controllers
 {
     public partial class CommunityCostsController : AccessController
     {
-        private readonly ILogger<IdentityController> _logger;
-        public CommunityCostsController(ILogger<IdentityController> logger, IFactoryWrapper factoryWrapper) : base(factoryWrapper)
+        public CommunityCostsController(IFactoryWrapper factoryWrapper) : base(factoryWrapper)
         {
             Constructing();
-            _logger = logger;
             Constructed();
         }
         partial void Constructing();
