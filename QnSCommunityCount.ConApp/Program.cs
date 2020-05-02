@@ -42,13 +42,13 @@ namespace QnSCommunityCount.ConApp
 
             try
             {
+                //await InitAppAccessAsync();
+                //await AddAppAccessAsync(AaUser, AaEmail, AaPwd, AaEnableJwt, AaRole);
+
                 var appLogin = await appAccountManager.LogonAsync(AaEmail, AaPwd);
 
                 await GenerateMarokkoAsync(appLogin.SessionToken);
                 await appAccountManager.LogoutAsync(appLogin.SessionToken);
-
-                //await InitAppAccessAsync();
-                //await AddAppAccessAsync(AaUser, AaEmail, AaPwd, AaEnableJwt, AaRole);
             }
             catch (Exception ex)
             {

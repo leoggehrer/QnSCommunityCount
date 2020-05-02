@@ -21,7 +21,7 @@ namespace QnSCommunityCount.Transfer.Business.App
         public List<Balance> BalanceEntities { get; set; } = new List<Balance>();
 
         public override int Id { get => CostCollection.Id; }
-        public override byte[] Timestamp { get => CostCollection.Timestamp; }
+        public override byte[] RowVersion { get => CostCollection.RowVersion; }
         partial void OnCostCollectionReading()
         {
             _costCollection = CostCollectionEntity;

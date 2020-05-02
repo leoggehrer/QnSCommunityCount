@@ -16,7 +16,7 @@ namespace QnSCommunityCount.Logic.Entities.Business.App
         internal CostCollection CostCollectionEntity { get; } = new CostCollection();
         internal List<CostRecord> CostRecordEntities { get; } = new List<CostRecord>();
         public override int Id { get => CostCollectionEntity.Id; set => CostCollectionEntity.Id = value; }
-        public override byte[] Timestamp { get => CostCollectionEntity.Timestamp; set => CostCollectionEntity.Timestamp = value; }
+        public override byte[] RowVersion { get => CostCollectionEntity.RowVersion; set => CostCollectionEntity.RowVersion = value; }
         partial void OnCostCollectionReading()
         {
             _costCollection = CostCollectionEntity;

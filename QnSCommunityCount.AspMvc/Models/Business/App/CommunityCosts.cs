@@ -18,7 +18,7 @@ namespace QnSCommunityCount.AspMvc.Models.Business.App
         public List<Balance> BalanceEntities { get; set; } = new List<Balance>();
 
         public override int Id { get => CostCollectionEntity.Id; set => CostCollectionEntity.Id = value; }
-        public override byte[] Timestamp { get => CostCollectionEntity.Timestamp; set => CostCollectionEntity.Timestamp = value; }
+        public override byte[] RowVersion { get => CostCollectionEntity.RowVersion; set => CostCollectionEntity.RowVersion = value; }
         partial void OnCostCollectionReading()
         {
             _costCollection = CostCollectionEntity;

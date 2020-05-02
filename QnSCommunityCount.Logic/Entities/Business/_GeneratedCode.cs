@@ -204,7 +204,7 @@ namespace QnSCommunityCount.Logic.Entities.Business.App
 			if (handled == false)
 			{
 				Id = other.Id;
-				Timestamp = other.Timestamp;
+				RowVersion = other.RowVersion;
 				CostCollection = other.CostCollection;
 				CostRecords = other.CostRecords;
 				TotalCosts = other.TotalCosts;
@@ -232,11 +232,11 @@ namespace QnSCommunityCount.Logic.Entities.Business.App
 			{
 				return false;
 			}
-			return Id == other.Id && IsEqualsWith(Timestamp, other.Timestamp) && IsEqualsWith(CostCollection, other.CostCollection) && IsEqualsWith(CostRecords, other.CostRecords) && TotalCosts == other.TotalCosts && CostsPerMember == other.CostsPerMember && NumberOfMembers == other.NumberOfMembers && IsEqualsWith(Members, other.Members) && IsEqualsWith(MemberAmounts, other.MemberAmounts) && IsEqualsWith(Balances, other.Balances);
+			return Id == other.Id && IsEqualsWith(RowVersion, other.RowVersion) && IsEqualsWith(CostCollection, other.CostCollection) && IsEqualsWith(CostRecords, other.CostRecords) && TotalCosts == other.TotalCosts && CostsPerMember == other.CostsPerMember && NumberOfMembers == other.NumberOfMembers && IsEqualsWith(Members, other.Members) && IsEqualsWith(MemberAmounts, other.MemberAmounts) && IsEqualsWith(Balances, other.Balances);
 		}
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(Id, Timestamp, CostCollection, CostRecords, TotalCosts, CostsPerMember, HashCode.Combine(NumberOfMembers, Members, MemberAmounts, Balances));
+			return HashCode.Combine(Id, RowVersion, CostCollection, CostRecords, TotalCosts, CostsPerMember, HashCode.Combine(NumberOfMembers, Members, MemberAmounts, Balances));
 		}
 	}
 }
@@ -276,7 +276,7 @@ namespace QnSCommunityCount.Logic.Entities.Business.Account
 			if (handled == false)
 			{
 				Id = other.Id;
-				Timestamp = other.Timestamp;
+				RowVersion = other.RowVersion;
 				FirstItem.CopyProperties(other.FirstItem);
 				ClearSecondItems();
 				foreach (var item in other.SecondItems)
@@ -302,11 +302,11 @@ namespace QnSCommunityCount.Logic.Entities.Business.Account
 			{
 				return false;
 			}
-			return Id == other.Id && IsEqualsWith(Timestamp, other.Timestamp) && IsEqualsWith(FirstItem, other.FirstItem) && IsEqualsWith(SecondItems, other.SecondItems);
+			return Id == other.Id && IsEqualsWith(RowVersion, other.RowVersion) && IsEqualsWith(FirstItem, other.FirstItem) && IsEqualsWith(SecondItems, other.SecondItems);
 		}
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(Id, Timestamp, FirstItem, SecondItems);
+			return HashCode.Combine(Id, RowVersion, FirstItem, SecondItems);
 		}
 	}
 }
@@ -346,7 +346,7 @@ namespace QnSCommunityCount.Logic.Entities.Business.Account
 			if (handled == false)
 			{
 				Id = other.Id;
-				Timestamp = other.Timestamp;
+				RowVersion = other.RowVersion;
 				FirstItem.CopyProperties(other.FirstItem);
 				SecondItem.CopyProperties(other.SecondItem);
 			}
@@ -368,11 +368,11 @@ namespace QnSCommunityCount.Logic.Entities.Business.Account
 			{
 				return false;
 			}
-			return Id == other.Id && IsEqualsWith(Timestamp, other.Timestamp) && IsEqualsWith(FirstItem, other.FirstItem) && IsEqualsWith(SecondItem, other.SecondItem);
+			return Id == other.Id && IsEqualsWith(RowVersion, other.RowVersion) && IsEqualsWith(FirstItem, other.FirstItem) && IsEqualsWith(SecondItem, other.SecondItem);
 		}
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(Id, Timestamp, FirstItem, SecondItem);
+			return HashCode.Combine(Id, RowVersion, FirstItem, SecondItem);
 		}
 	}
 }
